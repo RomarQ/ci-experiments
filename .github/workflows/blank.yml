@@ -55,7 +55,7 @@ jobs:
 
   # This workflow contains a single job called "build"
   dev-test:
-    if: needs.set-tags.outputs.any_changed == 'true'
+    if: ${{ always() && needs.set-tags.outputs.any_changed == 'true' }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     permissions:
