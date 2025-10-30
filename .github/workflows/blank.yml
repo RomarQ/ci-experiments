@@ -64,11 +64,8 @@ jobs:
 
   # This workflow contains a single job called "build"
   dev-test:
-    if: ${{ needs.set-tags.outputs.any_changed == 'true' }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     needs: [set-tags, build]
     timeout-minutes: 20
     strategy:
@@ -80,6 +77,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+        if: ${{ needs.set-tags.outputs.any_changed == 'true' }}
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
